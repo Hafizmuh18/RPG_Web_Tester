@@ -3,8 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 def char_desc(request):
     context = {
-        'char_name' : 'Kermel',
         'name' : 'Death Sytche',
+        'item_id' : '101',
+        'item_type' : 'Weapon (Sword)',
         'amount' : '1',
         'power' : '250',
         'price' : '100000000000000',
