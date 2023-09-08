@@ -1,8 +1,9 @@
 from django.urls import path
-from main.views import char_desc
+from main.views import char_desc, display_main
 
 app_name = 'main'
 
 urlpatterns = [
-    path('', char_desc, name='char_desc'),
+    path('<str:id>', char_desc, name='char_desc'),
+    path('', display_main, name="display_main")
 ]

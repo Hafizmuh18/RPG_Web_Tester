@@ -1,10 +1,11 @@
-<h1>Character Details</h1>
+<h1>Cards Products</h1>
 
-<h1>{{name}}</h1>
-<p>ID : {{item_id}}</p>
-<P>Type : {{item_type}}</P>
-<p>Amount : {{amount}}</p>
-<p>Power : {{power}}</p>
-<p>Price : {{price}}</p>
-<p>Unique Skill : {{unique_skill|linebreaks}}</p>
-<p>Desciption : {{description|linebreaks}}</p>
+<div>
+    {% for card in cards %}
+        <a href="/main/{{card.item_id}}">{{card.name}}</a>
+    {% endfor %}
+
+    <!-- {% for num in list %}
+        <p>{{num}}</p>
+    {% endfor %} -->
+</div>
