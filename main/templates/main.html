@@ -1,11 +1,53 @@
-<h1>Cards Products</h1>
+<head>
+    <title>Item List</title>
+</head>
 
-<div>
-    {% for card in cards %}
-        <a href="/main/{{card.item_id}}">{{card.name}}</a>
-    {% endfor %}
+<body style="background-image: url('https://i.pinimg.com/564x/ee/85/c5/ee85c523aafff237f32416e5fe276114.jpg');">
+    <h1 style="text-align: center; font-family: 'Courier New', Courier, monospace; color: antiquewhite;padding-top: 15px;">Item List</h1>
 
-    <!-- {% for num in list %}
-        <p>{{num}}</p>
-    {% endfor %} -->
-</div>
+    <style>
+        .box {
+            border-width:3px;
+            border-style:solid;
+            border-color:#5d0f0f;
+            display: inline-block;
+            vertical-align: top;
+            padding: 15px;
+            box-sizing: border-box;
+            width: 250px;
+            height: 100px;
+            text-align: center;
+            color: aliceblue;
+            background-color: rgb(67, 25, 25);
+        }
+        a:link {
+            color: rgb(180, 118, 118);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: rgb(180, 118, 118);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: brown;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: rgb(96, 26, 2);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+    </style>
+
+    <div>
+        {% for card in cards %}
+            <div class="box"><a href="/{{card.item_id}}"><p>{{card.name}}</p></a></div>
+        {% endfor %}
+    </div>
+</body>

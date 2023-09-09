@@ -1,9 +1,54 @@
-<h1>Item Details</h1>
+<head>
+    <title>{{name}}</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
 
-<h1>{{name}}</h1>
-<P>Type : {{item_type}}</P>
-<p>Amount : {{amount}}</p>
-<p>Power : {{power}}</p>
-<p>Price : {{price}}</p>
-<p>Unique Skill : {{unique_skill|linebreaks}}</p>
-<p>Desciption : {{description|linebreaks}}</p>
+		#divID {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100vh;
+			mix-blend-mode: hue;
+		}
+
+		body {
+			overflow: hidden;
+		}
+
+        .padder{
+            padding-top: 15px;
+        }
+	</style>
+</head>
+
+<body>
+    <div id="divID", style="text-align: center;">
+        <h1 class="padder">Item Details</h1>
+
+        <h2 class="padder">{{name}}</h2>
+        <P class="padder">Type : {{item_type}}</P>
+        <p class="padder">Amount : {{amount}}</p>
+        <p class="padder">Power : {{power}}</p>
+        <p class="padder">Price : {{price}}</p>
+        <p class="padder">Unique Skill : {{unique_skill|linebreaks}}</p>
+        <p class="padder">Desciption : {{description|linebreaks}}</p>
+    </div>
+
+    <script>
+        // Random nomor buat pemilihan warna
+        function randomColor() {
+            return Math.floor(Math.random() * 256);
+        }
+
+        // Set background colornya dengan warna hasil acak
+        function setRandomBackgroundColor() {
+            const divElem = document.getElementById("divID");
+            divElem.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+        }
+        // Setiap kali wen di refresh atau dibuka bakal set background color
+        document.addEventListener('DOMContentLoaded', setRandomBackgroundColor);
+    </script>
+</body>
