@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from pickle import NONE
+from django.shortcuts import render, redirect
 from .models import Item
 from django.http import HttpResponse
+from .forms import InputAddItem
 
 # Create your views here.
 def char_desc(request, id):
@@ -8,17 +10,6 @@ def char_desc(request, id):
         item = Item.objects.get(item_id=id)
     except:
         return HttpResponse("not found", status=404)
-
-    # context = {
-    #     'name' : 'Death Sytche',
-    #     'item_id' : '101',
-    #     'item_type' : 'Weapon (Sword)',
-    #     'amount' : '1',
-    #     'power' : '250',
-    #     'price' : '100000000000000',
-    #     'unique_skill' : 'The more enemy killed by this weapon, its power increase',
-    #     'description' : 'The sycthe of a Grim Reaper that has an ability of Soul Eater, it said that the weapon killed its own owner if it think that the user is not strong enough'
-    # }
 
     context = {
         'name': item.name,
@@ -35,15 +26,40 @@ def char_desc(request, id):
 def display_main(request):
     try:
         items = Item.objects.all()
-        for item in items:
-            print(item.item_id)
     except:
         return HttpResponse('not found', status=404)
     
     context = {
         'cards': items,
-        'list': [1,2,3]
     }
 
     return render(request, "main.html", context)
+
+def add_item(request):
+    print("jo")
+    if request.method == 'POST':
+        print("yo")
+        adding = InputAddItem(request.POST)
+        if adding.is_valid():
+            print("ko")
+            new_item = Item.objects.create(
+                name = adding.cleaned_data.get('inp_name'),
+                item_type = adding.cleaned_data.get('inp_item_type'),
+                amount = adding.cleaned_data.get('inp_amount'),
+                power = adding.cleaned_data.get('inp_power'),
+                price = adding.cleaned_data.get('inp_price'),
+                unique_skill = adding.cleaned_data.get('inp_unique_skill'),
+                description = adding.cleaned_data.get('inp_description')
+            )
+            return redirect('display_main')
+        context = {
+            'item_form' : adding
+        }
+        return render(request, 'additem.html', context)
+    # else:
+    #     adding = InputAddItem()
+    context={
+        'item_form' : InputAddItem
+    }
+    return render(request, 'additem.html', context)
     

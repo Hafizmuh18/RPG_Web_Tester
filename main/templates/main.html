@@ -1,18 +1,30 @@
 <head>
     <title>Item List</title>
-</head>
-
-<body style="background-image: url('https://i.pinimg.com/564x/ee/85/c5/ee85c523aafff237f32416e5fe276114.jpg');">
-    <h1 style="text-align: center; font-family: 'Courier New', Courier, monospace; color: antiquewhite;padding-top: 15px;">Item List</h1>
-
     <style>
+        body {
+            background-image: url('https://i.pinimg.com/564x/ee/85/c5/ee85c523aafff237f32416e5fe276114.jpg');
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-container {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            color: antiquewhite;
+            padding-top: 15px;
+        }
+
         .box {
-            border-width:3px;
-            border-style:solid;
-            border-color:#5d0f0f;
+            border-width: 3px;
+            border-style: solid;
+            border-color: #5d0f0f;
             display: inline-block;
             vertical-align: top;
-            padding: 15px;
+            margin: 15px;
             box-sizing: border-box;
             width: 250px;
             height: 100px;
@@ -20,34 +32,50 @@
             color: aliceblue;
             background-color: rgb(67, 25, 25);
         }
-        a:link {
-            color: rgb(180, 118, 118);
-            background-color: transparent;
-            text-decoration: none;
-        }
 
+        a:link,
         a:visited {
             color: rgb(180, 118, 118);
             background-color: transparent;
             text-decoration: none;
         }
 
-        a:hover {
+        a:hover,
+        a:active {
             color: brown;
             background-color: transparent;
             text-decoration: underline;
         }
 
-        a:active {
-            color: rgb(96, 26, 2);
-            background-color: transparent;
-            text-decoration: underline;
+        .popWrap {
+            padding: 1px;
+            display: inline-block;
+            height: 200px;
+            text-align: center;
+            margin-top: 20px; 
+        }
+
+        .myBtn {
+            display: block;
+            background-color: rgb(60, 18, 18);
+            border-color: rgb(61, 24, 24);
+            color: rgb(240, 156, 156);
         }
     </style>
+</head>
 
-    <div>
-        {% for card in cards %}
-            <div class="box"><a href="/{{card.item_id}}"><p>{{card.name}}</p></a></div>
-        {% endfor %}
+<body>
+    <div class="page-container">
+        <h1>Item List</h1>
+
+        <div>
+            {% for card in cards %}
+                <div class="box"><a href="/{{card.item_id}}"><p>{{card.name}}<br>Amount : {{card.amount}}</p></a></div>
+            {% endfor %}
+        </div>
+
+        <div class="popWrap">
+            <button class="myBtn" onClick="window.location='/add_item/'">Add Item</button>
+        </div>
     </div>
 </body>

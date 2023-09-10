@@ -4,7 +4,7 @@ import uuid
 # Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=100)
-    item_id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False, unique=True)
+    item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     item_type = models.CharField(max_length=100, null=True, blank=True)
     amount = models.IntegerField(default=1)
     power = models.IntegerField(default=0)
