@@ -36,12 +36,9 @@ def display_main(request):
     return render(request, "main.html", context)
 
 def add_item(request):
-    print("jo")
     if request.method == 'POST':
-        print("yo")
         adding = InputAddItem(request.POST)
         if adding.is_valid():
-            print("ko")
             new_item = Item.objects.create(
                 name = adding.cleaned_data.get('inp_name'),
                 item_type = adding.cleaned_data.get('inp_item_type'),
