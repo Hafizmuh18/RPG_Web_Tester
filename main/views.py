@@ -31,6 +31,9 @@ def display_main(request):
     
     context = {
         'cards': items,
+        'project' : "RPG WEB TESTER",
+        'nama_pembuat' : "Muhammad Hafiz",
+        'kelas' : "PBP F",
     }
 
     return render(request, "main.html", context)

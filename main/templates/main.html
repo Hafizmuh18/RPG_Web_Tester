@@ -1,5 +1,5 @@
 <head>
-    <title>Item List</title>
+    <title>RPG Web Tester</title>
     <style>
         body {
             background-image: url('https://i.pinimg.com/564x/ee/85/c5/ee85c523aafff237f32416e5fe276114.jpg');
@@ -11,7 +11,7 @@
             text-align: center;
         }
 
-        h1 {
+        .page_title {
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
             color: antiquewhite;
@@ -65,8 +65,14 @@
 </head>
 
 <body>
+    
     <div class="page-container">
-        <h1>Item List</h1>
+        <div class = "page_title">
+            <h1>{{ project }}</h1>
+            <h2>{{ nama_pembuat }}</h2>
+            <h2>{{ kelas }}</h2>
+            <h3>Item List</h3>
+        </div>
 
         <div>
             {% for card in cards %}
