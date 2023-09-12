@@ -2,14 +2,14 @@ from pickle import NONE
 from django.shortcuts import render, redirect
 from .models import Item
 from django.http import HttpResponse
-from .forms import InputAddItem
+from .forms import InputAddItem, InputRemoveItem
 
 # Create your views here.
 def char_desc(request, id):
     try:
         item = Item.objects.get(item_id=id)
     except:
-        return HttpResponse("not found", status=404)
+        return render(request, 'pagenotfound.html', status=404)
 
     context = {
         'name': item.name,
@@ -27,7 +27,7 @@ def display_main(request):
     try:
         items = Item.objects.all()
     except:
-        return HttpResponse('not found', status=404)
+        return render(request, 'pagenotfound.html', status=404)
     
     context = {
         'cards': items,
@@ -43,13 +43,13 @@ def add_item(request):
         adding = InputAddItem(request.POST)
         if adding.is_valid():
             new_item = Item.objects.create(
-                name = adding.cleaned_data.get('inp_name'),
-                item_type = adding.cleaned_data.get('inp_item_type'),
-                amount = adding.cleaned_data.get('inp_amount'),
-                power = adding.cleaned_data.get('inp_power'),
-                price = adding.cleaned_data.get('inp_price'),
-                unique_skill = adding.cleaned_data.get('inp_unique_skill'),
-                description = adding.cleaned_data.get('inp_description')
+                name = adding.cleaned_data.get('Name'),
+                item_type = adding.cleaned_data.get('Item_Type'),
+                amount = adding.cleaned_data.get('Amount'),
+                power = adding.cleaned_data.get('Power'),
+                price = adding.cleaned_data.get('Price'),
+                unique_skill = adding.cleaned_data.get('Unique_Skill'),
+                description = adding.cleaned_data.get('Description')
             )
             return redirect('display_main')
         context = {
@@ -62,4 +62,23 @@ def add_item(request):
         'item_form' : InputAddItem
     }
     return render(request, 'additem.html', context)
+
+def remove_item(request):
+    if request.method == 'POST':
+        remove_form = InputRemoveItem(request.POST)
+        if remove_form.is_valid():
+            nama_to_remove = remove_form.cleaned_data.get('Nama')
+            try:
+                item = Item.objects.get(name=nama_to_remove)
+                item.delete()
+                return redirect('display_main')
+            except Item.DoesNotExist:
+                return HttpResponse("Item not Found", status=200)
+        else:
+            return HttpResponse("Invalid Form Data", status=400)
+
+    context = {
+        'remove_form': InputRemoveItem()
+    }
+    return render(request, 'removeitem.html', context)
     
