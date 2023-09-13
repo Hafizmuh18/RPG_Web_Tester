@@ -26,6 +26,8 @@ _APPS.\
 ------------------- Bagan Request Client -------------------\
 ![Alt text](IMG_20230911_233741.jpg)
 
+Jadi pada saat client mengakses link url di web maka akan mengakses file urls.py di dalam project yang akan mengarahkan lagi ke dalam urls.py yang ada di dalam bagian apps yang sesusai dengan link url yang dimasukan. Setelah itu file urls.py di apps itu akan mengakses method yaang sesuai di bagian views.py yang kemudian akan mengakses models.py dan juga akan menampilkan file template html ke dlam website yang akan menyediakan informasi bagi client/user.
+
 ------------------- Virtual Environment -------------------\
 Virtual Environment digunakan agar untuk tiap project Django yang berbeda-beda dapat memiliki libraries, frameworks ataupun package yang berbeda-beda ataupun yang sama dengan versi yang berbeda-beda untuk mendukung pembuatan project dengan fungsi dan kegunaan masing-masing. Dengan begitu maka kita dapat menghindari untuk konflik terjadi pada satu project ke project lain karena penggunaan versi-versi yang berbeda.\
 
