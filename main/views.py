@@ -1,4 +1,3 @@
-from pickle import NONE
 from django.shortcuts import render, redirect
 from .models import Item
 from django.http import HttpResponse
@@ -42,7 +41,7 @@ def add_item(request):
     if request.method == 'POST':
         adding = InputAddItem(request.POST)
         if adding.is_valid():
-            new_item = Item.objects.create(
+            Item.objects.create(
                 name = adding.cleaned_data.get('Name'),
                 item_type = adding.cleaned_data.get('Item_Type'),
                 amount = adding.cleaned_data.get('Amount'),
