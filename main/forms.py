@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Item
 
 class InputAddItem(forms.Form):
     Name = forms.CharField(required=True, max_length=100)
@@ -11,3 +13,10 @@ class InputAddItem(forms.Form):
 
 class InputRemoveItem(forms.Form):
     Nama = forms.CharField(required=True, max_length=100)
+
+
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Item
+        fields = ["name", "item_type", "amount", "power", "price", "unique_skill", "description"]

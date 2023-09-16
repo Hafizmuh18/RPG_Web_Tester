@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Item
 from django.http import HttpResponse
 from .forms import InputAddItem, InputRemoveItem
+from django.http import HttpResponseRedirect
+from main.forms import ItemForm
+from django.urls import reverse
+from django.core import serializers
 
 # Create your views here.
 def char_desc(request, id):
@@ -80,4 +84,19 @@ def remove_item(request):
         'remove_form': InputRemoveItem()
     }
     return render(request, 'removeitem.html', context)
+
+def view_xml(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
     
+def view_json(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def view_xml_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def view_json_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
