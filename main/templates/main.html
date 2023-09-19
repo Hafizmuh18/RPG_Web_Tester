@@ -27,7 +27,7 @@
             margin: 15px;
             box-sizing: border-box;
             width: 250px;
-            height: 100px;
+            height: 120px;
             text-align: center;
             color: aliceblue;
             background-color: rgb(67, 25, 25);
@@ -73,11 +73,12 @@
             <h2>{{ nama_pembuat }}</h2>
             <h2>{{ kelas }}</h2>
             <h3>Item List</h3>
+            <h4>Jumlah Item : {{cards|length}}</h4>
         </div>
 
         <div>
             {% for card in cards %}
-                <div class="box"><a href="/{{card.item_id}}"><p>{{card.name}}<br>ID : {{card.item_id}}<br>Amount : {{card.amount}}</p></a></div>
+                <div class="box"><a href="/{{card.name}}"><p>{{card.name}}<br>Web ID : {{card.pk}}<br>Amount : {{card.amount}}</p></a></div>
             {% endfor %}
         </div>
 

@@ -6,7 +6,6 @@ from django.core import serializers
 app_name = ''
 
 urlpatterns = [
-    path('<str:id>', char_desc, name='char_desc'),
     path('', display_main, name="display_main"),
     path('add_item/', add_item, name="add_item"),
     path('remove_item/', remove_item, name="remove_item"),
@@ -14,4 +13,5 @@ urlpatterns = [
     path('json/', view_json, name='view_json'),
     path('xml/<int:id>/', view_xml_id, name='view_xml_id'),
     path('json/<int:id>/', view_json_id, name='view_json_id'), 
+    path('<str:id>/', char_desc, name='char_desc'),
 ]

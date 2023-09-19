@@ -6,11 +6,16 @@ from django.http import HttpResponseRedirect
 from main.forms import ItemForm
 from django.urls import reverse
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # Create your views here.
 def char_desc(request, id):
     try:
-        item = Item.objects.get(item_id=id)
+        if id.isdigit():
+            item = Item.objects.get(pk=id)
+        else :
+            item = Item.objects.get(name=id)
     except:
         return render(request, 'pagenotfound.html', status=404)
 
@@ -66,6 +71,7 @@ def add_item(request):
     }
     return render(request, 'additem.html', context)
 
+
 def remove_item(request):
     if request.method == 'POST':
         remove_form = InputRemoveItem(request.POST)
@@ -95,8 +101,12 @@ def view_json(request):
 
 def view_xml_id(request, id):
     data = Item.objects.filter(pk=id)
+    if not data:
+        return render(request, 'pagenotfound.html', status=404)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def view_json_id(request, id):
     data = Item.objects.filter(pk=id)
+    if not data:
+        return render(request, 'pagenotfound.html', status=404)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

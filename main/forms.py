@@ -14,8 +14,6 @@ class InputAddItem(forms.Form):
 class InputRemoveItem(forms.Form):
     Nama = forms.CharField(required=True, max_length=100)
 
-
-
 class ItemForm(ModelForm):
     class Meta:
         model = Item

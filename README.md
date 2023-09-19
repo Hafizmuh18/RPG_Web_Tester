@@ -2,6 +2,8 @@ Nama : Muhammad Hafiz\
 NPM : 22060827327\
 Kelas : PBPF
 
+
+============================================== TUGAS 2 ==============================================
 ------------------- Adaptable Project Link -------------------\
 Link = https://rpg-web-tester.adaptable.app
 
@@ -23,7 +25,7 @@ _APPS.\
 
 ✅ Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy, serta jawaban dari beberapa pertanyaan berikut : Membuat file README.md pada folder tugas lalu menjawab-jawab perintah dan pertanyaan yang diberikan.\
 
-------------------- Bagan Request Client -------------------\
+------------------- Bagan Request Client -------------------
 ![Alt text](IMG_20230911_233741.jpg)
 
 Jadi pada saat client mengakses link url di web maka akan mengakses file urls.py di dalam project yang akan mengarahkan lagi ke dalam urls.py yang ada di dalam bagian apps yang sesusai dengan link url yang dimasukan. Setelah itu file urls.py di apps itu akan mengakses method yaang sesuai di bagian views.py yang kemudian akan mengakses models.py dan juga akan menampilkan file template html ke dlam website yang akan menyediakan informasi bagi client/user.
@@ -51,3 +53,34 @@ Kita tetap dapat membuat project Django tanpa menggunakan Virtual Environment, n
     - ViewModel : Bagian yang bertugas untuk mengatur hubungan antara bagian Model dan bagian View di dalam setiap proses request dari client/user.\
 
 Perbedaanya adalah MVC adalah sistem yang bisanya digunakan dalam membuat pengembangan sistem perangkat lunak, sedangkan MVT adalah MVC yang secara spesifik digunakan di dalam pengembangan project Django, lalu MVVM digunakan di dalam pengembangan sebuah sistem aplikasi yang lebih berfokus di dalam penggunaan UI (User Interface).
+
+============================================== TUGAS 3 ==============================================
+
+---------------------------- GET & POST ----------------------------
+GET = Client menerima input dari user lalu data yang diterima kemudian dapat ditampilkan di url.
+POST = Client menerima input dari user dan disimpan data tersebut di database.
+
+----------------------------  XML, JSON, dan HTML ----------------------------
+XML = XML menyimpan dan menyajikan data di dalam bentuk pohon (tree), XML menampilkan dan juga menyimpan data-data serta lapisan informasi dimulai dengan induk (elemen akar) lalu kemudian tentang elemen anaknya, struktur data seperti ini dapat memuat banyak variabel serta konfigurasinya lebih dinamis. XML biasanya digunakan untuk pertukaran data antara sistem yang berbeda terutama di dalam aplikasi web servis, atau serives yang memuliki lingkungan yang mmebutuhkan validasi dan pemerosesan yang kompleks.
+JSON = JSON menggunakan dictionary dengan pasangan key dan value dalam menyimpan dan menyajikan datanya, sehingga lebih padat serta mudah ditulis dan dibaca. JSON biasanya digunakan untuk pengiriman dara antaa aplikasi web dengan API.
+HTML = HTML tidak dibangun untuk pertukaran atau trasnfer data melainkan untuk menggambarkan tampilan dan struktur visualisasi dari data atau informasi yang ada kedalam laman web.
+
+---------------------------- JSON ----------------------------
+JSON lebih sering digunakan dalam pertukaran data antar aplikasi web modern karena struktur data yang ditukar pada JSON jauh lebih mudah untuk dibaca sehingga mudah untuk dipahami oleh manusia. Serta JSON memiliki kompatabilitas dengan JavaScript yang merupakan salah satu bahasa yang digunakan untuk menyusun aplikasi berbasis web, dengan menggunakan JavaScript data pada JSON jauh lebih mudah untuk diolah dan dimanipulasi untuk sisi client.
+
+---------------------------- Step by Step ----------------------------
+- Membuat file forms.py untuk sebagai form agar user dapar memasukan input data di halaman web, dan sistem dapat mengambil input tersebut dan mengelolah atau menggunakanya untuk tujuan dari web tersebut, seperti dalam konteks aplikasi ini input tersebut akan dibuat sebuah object di database dan disimpan.
+- Membuat fungsi-fungsi di dalam file views.py yang ada di app main yang dimana akan ditampilkan data yang ada di dalam program dalam bentuk XML dan JSON, serta juga dapat melihat tiap item XML dan JSON dari tiap item dengan mengspesifikan id dari item yang ingin dilihat (XML dan JSON by id)
+- Menambahkan path di urls.py di app main, yang akan memanggil fungsi-fungsi yang sudah dibuat tadi sesuai dengan input url yang diinginkan apakah seluruh data XML dan JSON atau XML dan JSON by id.
+
+---------------------------- POSTMAN ----------------------------
+-HTML
+![Alt text](image-2.png)
+-JSON
+![Alt text](image-1.png)
+-JSON by id
+![Alt text](image-3.png)
+-XML
+![Alt text](image-4.png)
+-XML by id
+![Alt text](image-5.png)
