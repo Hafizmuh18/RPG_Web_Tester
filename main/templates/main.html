@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block meta %}
 <head>
     <title>RPG Web Tester</title>
     <style>
@@ -64,7 +67,8 @@
         }
     </style>
 </head>
-
+{% endblock meta %}
+{% block content %}
 <body>
     
     <div class="page-container">
@@ -74,17 +78,36 @@
             <h2>{{ kelas }}</h2>
             <h3>Item List</h3>
             <h4>Jumlah Item : {{cards|length}}</h4>
+            <h5>Sesi terakhir login: {{ last_login }}</h5>
         </div>
 
         <div>
             {% for card in cards %}
-                <div class="box"><a href="/{{card.name}}"><p>{{card.name}}<br>Web ID : {{card.pk}}<br>Amount : {{card.amount}}</p></a></div>
+                <div class="box">
+                    <form method="POST" action="{% url 'main:display_main'%}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="">
+                        <p>
+                            {{ card.name }}<br>
+                            Web ID : {{ card.pk }}<br>
+                            Amount : <span id="amount_{{ card.pk }}">{{ card.amount }}</span>
+                        </p>
+                        <button class="myBtn" type="submit" name="action" value="increase-{{card.pk}}">Increase</button>
+                        <button class="myBtn" type="submit" name="action" value="decrease-{{card.pk}}">Decrease</button>
+                    </form>
+                </div>
             {% endfor %}
         </div>
 
         <div class="popWrap">
             <button class="myBtn" onClick="window.location='/add_item/'">Add Item</button>
             <button class="myBtn" onClick="window.location='/remove_item/'" >Remove Item</button>
+            <a href="{% url 'main:logout' %}">
+                <button class="myBtn">
+                    Logout
+                </button>
+            </a>
         </div>
     </div>
 </body>
+{% endblock content %}

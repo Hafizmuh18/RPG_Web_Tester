@@ -84,3 +84,17 @@ JSON lebih sering digunakan dalam pertukaran data antar aplikasi web modern kare
 ![Alt text](image-4.png)
 -XML by id
 ![Alt text](image-5.png)
+
+============================== TUGAS 4 ============================
+1. Django usercreation form adalah sebuah fitur build-in dari django yang berupa form yang manghandle authentifikasi user dari web django tersebut, seperti pembuatan akun user (register) dan masuk ke siste si user tersebut (login). Keuntungan dari fitur ini adalah, adanya validasi input register yang otomatis seperti password yang memiliki aturan dan akun dengan username yang sama, keamanan dari input akun user yang lebih aman dikarenakan divalidasi langsung oleh sistem django. Sedangkan kekuranganya adalah style dari form nya yang harus dibuat sendiri, serta aturan batasan input yang disetel langsung oleh djangonya.
+2. Autentifikasi adalah proses dimana sistem memverifikasi user yang masuk dengan menggunakan input yang user tersebut masukan seperti username dan password. Sedangkan otorisasi adalah batasan atau perizinan hal-hal atau fitur0fitur apa saja yang dapat diakses dari user tersebut. Keduanya penting untuk menjaga keamanan dari website, untuk menghidari dari serangan serangan yang tidak diinginkan, serta melindungi data pribadi yang tidak diinginkan user untuk dipublikasi, serta mengatur kontrol akses dari tiap user tergantung batasan yang ditetapkan.
+3. Cookie adalah data yang disimpan di bagian client yang dapat digunakan web untuk menyimpan informasi respone dari http. Django memanfaatkan cookie untuk memberikan fitur fitur build in nya seperti mengatur pengelolaan data session dari pengguna.
+4. Pasti terdapat resiko yang harus diawasi dari penggunaan cookie secara default seperti adanya pencurian data-data di dalam cookie tersebut oleh pihak yang tidak diinginkan, serta bisa terjadinya serangan cross-site request forgery(csrf).
+
+- Memasukan /mengimport fitur build-in dari django yaitu UserCraetionForm untuk membantu membuat atau menghandle authentifikasi user.
+- Membuat file-file html untuk bagian login dan register
+- Di file views.py membuat fungsi yang menghandle login dan menghandle register, lalu memanfaatkan UserCreationForm untuk membuat form input dari user untuk login atau register, dan menrendernya di file html sebelumnya.
+- Lalu memberikan routing di file urls.py yang ada di dalam app main ke masing-masing login dan register.
+- Setelah itu dengan langkah yang sama membuat fitur logout dengan langkah-langkah yang sama.
+- Membuat dua akun dengan cara melakukan register sebanyak 2 kali dengan 2 username yang berbeda, lalu di tiap akun tersebut membuat 3 item baru masing masing akun.
+- Lalu dengan memanfaatkan cookie serta dengan mengimport datetime dari library python mengambil data last login di dalam cookie tersebut lalu dipasangkan dengan waktu yang ada di dalam library datetime tersebut, lalu ditampilkan di file main.html dengan memasukanya di fungsi display_main.
