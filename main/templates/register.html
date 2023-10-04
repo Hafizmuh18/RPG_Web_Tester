@@ -2,33 +2,43 @@
 
 {% block meta %}
     <title>Register</title>
+    <style>
+        .box {
+            min-height: 100vh; /* minimum height = screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 {% endblock meta %}
 
 {% block content %}  
-
-<div class = "login">
+<div class="box">
     
-    <h1>Register</h1>  
-
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
-</div>  
+    <div class="card text-white bg-dark mb-3" style="width: 35rem; height: 40rem;">   
+        <div class = "card-header" style="padding-top: 1rem; text-align: center; vertical-align: middle;">
+            <h1>Register</h1> 
+        </div>
+        <form method="POST" action="">
+            <div class="card-body" style="padding-top: 2rem; text-align: center; vertical-align: middle;">
+                {% csrf_token %}
+                <table class="card-title">
+                    {{ form.as_table }}  
+                    <tr>  
+                        <td></td>
+                        <td><input type="submit" name="submit" value="Daftar"/></td>  
+                    </tr> 
+                </table>
+                </form>
+                {% if messages %}  
+                    <ul>   
+                        {% for message in messages %}  
+                            <li>{{ message }}</li>  
+                            {% endfor %}  
+                    </ul>   
+                {% endif %}
+            </div>
+    </div>
+</div>
 
 {% endblock content %}

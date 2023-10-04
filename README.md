@@ -98,3 +98,26 @@ JSON lebih sering digunakan dalam pertukaran data antar aplikasi web modern kare
 - Setelah itu dengan langkah yang sama membuat fitur logout dengan langkah-langkah yang sama.
 - Membuat dua akun dengan cara melakukan register sebanyak 2 kali dengan 2 username yang berbeda, lalu di tiap akun tersebut membuat 3 item baru masing masing akun.
 - Lalu dengan memanfaatkan cookie serta dengan mengimport datetime dari library python mengambil data last login di dalam cookie tersebut lalu dipasangkan dengan waktu yang ada di dalam library datetime tersebut, lalu ditampilkan di file main.html dengan memasukanya di fungsi display_main.
+
+============================== TUGAS 5 ============================
+1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya ? Manfaat dari element selector adalah untuk memberikan style di setiap elemen yang sama style yang sama, sehingga setiap elemen itu akan diberikan style yang sama. Penggunaannya yang tepat adalah saat ingin memberikan style yang sama pada satu elemen seperti paragraf, jika kita ingin membuat tiap elemen pada paragraf memiliki font atau warna yang spesifik, namun sama untuk tiap paragraf, maka kita dapat menggunakan elemen selector pada paragraf.
+2. HTML5 Tag
+- head : tempat untuk mmeberikan informasi terkait file dokumen/halaman web html.
+- body : bagian untuk mengatur bagian badan atau tampilan dari html.
+- style : tempat untuk memberikan desain atau style, atau membuat model css di dalam file html untuk dimasukan ke dalam bagian-bagian html.
+- script : tempat untuk membuat kode fungsi untuk membantu fungsi kerja dari website.
+- p : menandakan bagian teks tersebut adalah teks paragraf.
+- h1-h6 : menandakan bagian tersebut adalah bagian header
+- button : membuat sebuah button yang bisa diclick yang bisa memberikan fungsi yang berbeda-beda
+- table : membuat tabel yang berisi data
+- th : menandakan bagian header dari table
+- tr : membuat bagian row dari table
+- form : membuat form html untuk mejadi tempat bagi user untuk memasukan input.
+- div : menandakan suatu bagian dari kode sebagai satu bagian dari bagian tag div tersebut.
+- a : menandakan hyperlink
+3. Padding adalah salah satu attribute pada css yang berguna untuk memberikan batas pada konten ke bagian batasan kontainer nya atau bordernya. Sedangkan margin adalah salah satu attribute pada css yang berguna untuk memberikan batasan pada border dari suatu elemen kepada elemen lainnya.
+4. Tailwind lebih memiliki fleksibilitas yang tinggi, karena menggunakan pendekatan utility-first jadi maka kita dapat membangun tampilan desain webnya secara lebih fleksibel namun dengan memanfaatkan kelas-kelas utilitas yang sudah disediakan pada tailwind. Sedangkan bootstrap lebih memiliki konsistenitas yang lebih tinggi, karena bootstrap adalah sistem  komponen-komponen ui yang langsung siap dipakai, maka tampilan tampilan komponen pada bootstrap lebih bersifat konsisten dan tidak perlu membangun desain komponen dari awal. Tailwind lebih baik digunakan jika kita ingin membuat tampilan desain web yang sesuai degan keinginan dan lebih beraneka ragam, sedangkan menggunakan bootstrap jika kita ingin menggunakan desain yang cepat dan serta konsisten antar tiap komponen.
+5. Dengan cara ;
+- Menghubungkan menambahkan tag style di file-file html dan embuat model style css di dalam file-file tersebut lalu memasangkanya sebagai class maupun sebagai tag di html, seingga dapat menetapkan desain-desain ke dalam tampilan htmlnya.
+- Mengatur hal hal yang harus di desain, seperti membuat card untuk memasukan deskripsi singkat item, card dibuat untuk per item, lalu ditampilkan sesuai dengan urutan ite tersebut dibuat.
+- Mengubah tampilan halaman login dan register dengan menggunakan bantuan dari bootstrap untuk mendesain bentuk form dan style font dari halaman login dan register.

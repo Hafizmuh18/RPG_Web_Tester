@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import logout_user ,login_user, register, view_json_id, view_xml_id, view_json, view_xml, char_desc, display_main, add_item, remove_item
+from .views import test_page, logout_user ,login_user, register, view_json_id, view_xml_id, view_json, view_xml, char_desc, display_main, add_item, remove_item
 from django.http import HttpResponse
 from django.core import serializers
 
@@ -17,5 +17,5 @@ urlpatterns = [
     path('xml/<int:id>/', view_xml_id, name='view_xml_id'),
     path('json/<int:id>/', view_json_id, name='view_json_id'), 
     path('<str:id>/', char_desc, name='char_desc'),
-    
+    path('/test/', test_page, name='test_page'),
 ]

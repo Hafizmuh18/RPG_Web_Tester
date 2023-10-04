@@ -146,6 +146,8 @@ def add_item(request):
     }
     return render(request, 'additem.html', context)
 
+def test_page(request):
+    return render(request, 'main.html')
 
 def remove_item(request):
     if request.method == 'POST':

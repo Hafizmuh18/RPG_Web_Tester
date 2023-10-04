@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+
 <head>
     <title>Add Item</title>
     <style>
@@ -9,20 +13,51 @@
             font-family: 'Courier New', Courier, monospace;
             color: antiquewhite;
             padding-top: 15px;
+            min-height: 100vh; /* minimum height = screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            border-width: 3px;
+            border-style: solid;
+            border-color: #5d0f0f;
+            display: inline-block;
+            vertical-align: top;
+            margin: 15px;
+            box-sizing: border-box;
+            width: 30rem;
+            height: 45rem;
+            text-align: center;
+            color: aliceblue;
+            background-color: rgb(67, 25, 25);
+            padding-top: 20px;
+        }
+        .myBtn {
+            display: block;
+            background-color: rgb(60, 18, 18);
+            border-color: rgb(61, 24, 24);
+            color: rgb(240, 156, 156);
+            display: inline-block;
+        }
+        #h1{
+            color: #5d0f0f;
         }
     </style>
 </head>
+{% endblock meta %}
 
+{% block content %}
 <body>
     <h1>Add Item</h1>
     <form method="post" id="item-form">
         {% csrf_token %}
-        <table>
+        <table class="box">
             {{ item_form.as_table }}
             <tr>
                 <td></td>
                 <td>
-                    <button type="button" onclick="confirmAddItem()">Add Item</button>
+                    <button class="myBtn" type="submit" onclick="confirmAddItem()">Add Item</button>
                 </td>
             </tr>
         </table>
@@ -42,3 +77,4 @@
         }
     </script>
 </body>
+{% endblock content %}
