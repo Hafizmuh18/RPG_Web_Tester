@@ -17,5 +17,5 @@ urlpatterns = [
     path('xml/<int:id>/', view_xml_id, name='view_xml_id'),
     path('json/<int:id>/', view_json_id, name='view_json_id'), 
     path('<str:id>/', char_desc, name='char_desc'),
-    path('/test/', test_page, name='test_page'),
+    path('test/', test_page, name='test_page'),
 ]
