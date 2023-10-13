@@ -205,7 +205,7 @@
     
     refreshProducts();
     function deleteItem() {
-        fetch("{% url 'main:delete_ajax' %}", {
+        fetch("{% url 'main:delete_ajax' %}",{
             method: "POST",
             body: new FormData(document.querySelector('#form-delete'))
         }).then(refreshProducts)
