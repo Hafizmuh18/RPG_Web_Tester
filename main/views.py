@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Item
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from .forms import InputAddItem, InputRemoveItem
 from django.http import HttpResponseRedirect
 from main.forms import ItemForm
@@ -19,12 +19,43 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Item
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Item
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def delete_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        item = Item.objects.filter(name=name)
+        item.delete()
+        return HttpResponse(b"Deleted", status=201)
+
+    return HttpResponseNotFound()
 
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def get_product_json(request):
+    item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        item_type = request.POST.get("item_type")
+        amount = request.POST.get("amount")
+        power = request.POST.get("power")
+        price = request.POST.get("price")
+        unique_skill = request.POST.get("unique_skill")
+        description = request.POST.get("description")
+        user = request.user
+        Item.objects.create(name=name, item_type=item_type, amount=amount, power=power, price=price, unique_skill=unique_skill, description=description, user=user)
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
 
 def login_user(request):
     if request.method == 'POST':

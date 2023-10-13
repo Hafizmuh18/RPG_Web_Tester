@@ -89,6 +89,10 @@
             height: 40px;
             background: grey;
         }
+        .form-design{
+            color: aliceblue;
+            background-color: rgb(67, 25, 25);
+        }
 
     </style>
 </head>
@@ -102,107 +106,164 @@
             <h2>{{ nama_pembuat }}</h2>
             <h2>{{ kelas }}</h2>
             <h3>Item List</h3>
-            <h4>Jumlah Item : {{cards|length}}</h4>
+            <h4 class="jmlItem" id="jumlahItem">Jumlah Item : {{cards|length}}</h4>
             <h5>Sesi terakhir login: {{ last_login }}</h5>
         </div>
 
-        <div>
-            {% for card in cards %}
-            <div class="box {% if forloop.last %}last-card{% endif %}">
-                <form method="POST" action="{% url 'main:display_main'%}">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="">
-                    <p>
-                        {{ card.name }}<br>
-                        Web ID : {{ card.pk }}<br>
-                        Amount : <span id="amount_{{ card.pk }}">{{ card.amount }}</span>
-                    </p>
-                    <button class="myBtn" type="submit" name="action" value="increase-{{card.pk}}">Increase</button>
-                    <button class="myBtn" type="submit" name="action" value="decrease-{{card.pk}}">Decrease</button>
-                </form>
-            </div>
-        {% endfor %}
-        </div> 
+        <div id="cards"></div>
 
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                <div class="modal-content" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                    <div class="modal-header" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: aliceblue;background-color: rgb(67, 25, 25);">Add New Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: aliceblue;background-color: rgb(67, 25, 25);"></button>
+                    </div>
+                    <div class="modal-body" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                        <form id="form" onsubmit="return false;" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="item_type" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Item Type:</label>
+                                <input type="text" class="form-control" id="item_type" name="item_type" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Amount:</label>
+                                <input type="number" class="form-control" id="amount" name="amount" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="power" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Power:</label>
+                                <input type="number" class="form-control" id="power" name="power" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Price:</label>
+                                <input type="number" class="form-control" id="price" name="price" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="unique_skill" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Unique skill:</label>
+                                <input class="form-control" id="unique_skill" name="unique_skill" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="col-form-label" style="color: aliceblue;background-color: rgb(67, 25, 25);">Description:</label>
+                                <textarea class="form-control" id="description" name="description" style="color: aliceblue;background-color: rgb(111, 36, 36);"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="color: aliceblue;background-color: rgb(67, 25, 25);">Close</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal" style="color: aliceblue;background-color: rgb(67, 25, 25);">Add Product</button>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="color: aliceblue;">
+            <div class="modal-dialog" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                <div class="modal-content" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                    <div class="modal-header" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel" style="color: aliceblue;background-color: rgb(67, 25, 25);">Delete Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: aliceblue;background-color: rgb(67, 25, 25);"></button>
+                    </div>
+                    <div class="modal-body" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                        <form id="form-delete" onsubmit="return false;" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                            {% csrf_token %}
+                            <div class="mb-3" style="color: aliceblue;background-color: rgb(67, 25, 25);">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" style="color: aliceblue;background-color: rgb(111, 36, 36);"></input>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(60, 18, 18);border-color: rgb(61, 24, 24);color: rgb(240, 156, 156);">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="button_delete" data-bs-dismiss="modal" style="background-color: rgb(60, 18, 18);border-color: rgb(61, 24, 24);color: rgb(240, 156, 156);">Delete Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="popWrap">
-            <button class="myBtn" onClick="window.location='/add_item/'">Add Item</button>
+            <button class="myBtn" onClick="window.location='/add_item/'" >Add Item</button>
             <button class="myBtn" onClick="window.location='/remove_item/'" >Remove Item</button>
             <a href="{% url 'main:logout' %}">
                 <button class="myBtn">
                     Logout
                 </button>
             </a>
+            <a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: rgb(60, 18, 18);border-color: rgb(61, 24, 24);color: rgb(240, 156, 156);">Add Item by AJAX</button>
+            </a>
+            <button type="button" class="btn btn-primary" id="button_delete" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: rgb(60, 18, 18);border-color: rgb(61, 24, 24);color: rgb(240, 156, 156);">Delete Item by AJAX</button>
         </div>
+        
     </div>
+    
 </body>
 
-<footer class="text-center text-white" style="background-color: #410a0a;">
-    <!-- Grid container -->
-    <div class="container pt-4">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-facebook-f"></i
-        ></a>
-  
-        <!-- Twitter -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-twitter"></i
-        ></a>
-  
-        <!-- Google -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-google"></i
-        ></a>
-  
-        <!-- Instagram -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!instagram.com\hafizmuh221"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-instagram"></i
-        ></a>
-  
-        <!-- Linkedin -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <!-- Github -->
-        <a
-          class="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-          ><i class="fab fa-github"></i
-        ></a>
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-  
-    <!-- Copyright -->
-    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+<script>
+    
+    refreshProducts();
+    function deleteItem() {
+        fetch("{% url 'main:delete_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form-delete'))
+        }).then(refreshProducts)
+
+        document.getElementById("form-delete").reset()
+        return false
+    };
+
+
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json());
+    }
+
+    async function refreshProducts() {
+        // const jumlahItemElement = document.getElementById("jumlahItem");
+        const cardsElement = document.getElementById("cards");
+        document.getElementById("cards").innerHTML = "";
+        const products = await getProducts();
+        let htmlString = "";
+
+        products.forEach((card, index) => {
+            const isLastCard = index === products.length - 1;
+            const cardClass = isLastCard ? "box last-card" : "box";
+
+            htmlString += `
+                <div class="${cardClass}">
+                    <form method="POST" action="{% url 'main:display_main'%}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="">
+                        <p>
+                            ${card.fields.name}<br>
+                            Web ID : ${card.pk}<br>
+                            Amount : ${card.fields.amount}<br>
+                        </p>
+                        <button class="myBtn" type="submit" name="action" value="increase-${card.pk}">Increase</button>
+                        <button class="myBtn" type="submit" name="action" value="decrease-${card.pk}">Decrease</button>
+                    </form>
+                </div>`;
+        });
+
+        document.getElementById("cards").innerHTML = htmlString;
+        document.getElementById("jumlahItem").innerText = `Jumlah Item : ${products.length}`;
+    }
+
+
+    function addItem() {
+        fetch("{% url 'main:create_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+
+    document.getElementById("button_add").onclick = addItem;
+    document.getElementById("button_delete").onclick = deleteItem;
+</script>
+
 {% endblock content %}

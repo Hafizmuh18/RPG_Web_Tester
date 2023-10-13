@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import test_page, logout_user ,login_user, register, view_json_id, view_xml_id, view_json, view_xml, char_desc, display_main, add_item, remove_item
+from .views import delete_item_ajax, add_product_ajax, get_product_json, test_page, logout_user ,login_user, register, view_json_id, view_xml_id, view_json, view_xml, char_desc, display_main, add_item, remove_item
 from django.http import HttpResponse
 from django.core import serializers
 
@@ -7,6 +7,9 @@ app_name = 'main'
 
 urlpatterns = [
     path('', display_main, name="display_main"),
+    path('get-product/', get_product_json, name='get_product_json'),
+    path('create-ajax/', add_product_ajax, name='create_ajax'),
+    path('delete-ajax/', delete_item_ajax, name='delete_ajax'),
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
