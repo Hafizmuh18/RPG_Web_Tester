@@ -5,7 +5,7 @@ Kelas : PBPF
 
 ============================================== TUGAS 2 ==============================================
 ------------------- Adaptable Project Link -------------------\
-Link = https://rpg-web-tester.adaptable.app
+Link = muhammad-hafiz23-tugas.pbp.cs.ui.ac.id
 
 ------------------- Implement Checklist Tugas -------------------\
 ✅ Membuat project Django baru : Membuat folder baru dan menginisiasi git init di folder tersebut. Lalu membuat repository baru di github lalu menghubungkan repository github tersebut dengan lokal folder. Lalu mengaktifkan Virtual Environment, lalu masuk ke virtual environment tersebut. Lalu membuat file txt yang berisi library, frameworks dam package, lalu menginstall semua itu dengan menjalankan "pip install -r [nama file txt].txt". Lalu menjalankan "django-admin startproject [Nama Project]".\
