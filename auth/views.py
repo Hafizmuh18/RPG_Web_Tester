@@ -12,6 +12,7 @@ def login(request):
     password = request.POST['password']
     user = authenticate(username=username, password=password)
     if user is not None:
+        
         if user.is_active:
             auth_login(request, user)
             # Status login sukses.
