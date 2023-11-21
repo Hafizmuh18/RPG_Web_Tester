@@ -216,6 +216,10 @@ def view_json(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+def view_json_user(request):
+    item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", item), content_type="application/json")
+
 def view_xml_id(request, id):
     data = Item.objects.filter(pk=id)
     if not data:
