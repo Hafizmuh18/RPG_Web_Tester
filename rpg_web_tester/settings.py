@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'auth',
-    'corsheaders'
+    'corsheaders',
 ]
 
 COMPRESS_ROOT = BASE_DIR / 'static'

@@ -12,9 +12,3 @@ class Item(models.Model):
     price = models.IntegerField(default=0)
     unique_skill = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-
-class Employee(models.Model):
-    name = models.CharField(max_length=100)
-    age = models.IntegerField()
-    hobby = models.TextField()
-    

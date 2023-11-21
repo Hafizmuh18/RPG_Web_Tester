@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,13 +7,15 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from main.models import Item
+
 @csrf_exempt
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
     if user is not None:
-        
+
         if user.is_active:
             auth_login(request, user)
             # Status login sukses.
@@ -50,3 +53,26 @@ def logout(request):
         "status": False,
         "message": "Logout gagal."
         }, status=401)
+    
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+        
+        new_product = Item.objects.create(
+            user = request.user,
+            name = data["name"],
+            item_type = data["item_type"],
+            amount = int(data["amount"]),
+            power = int(data["power"]),
+            price = int(data["price"]),
+            unique_skill = data["unique_skill"],
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
